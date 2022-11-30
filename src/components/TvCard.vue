@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "AppCard",
+  name: "TvCard",
   props: {
     info: Object,
   },
@@ -43,15 +43,15 @@ export default {
     <ul class="list-group">
       <li>
         <h5 class="list-group-item list-group-item-warning rounded-top mb-0">
-          {{ info.title }}
+          {{ info.name }}
         </h5>
       </li>
       <li>
         <div
           class="list-group-item list-group-item-warning"
-          v-if="info.original_title != info.title"
+          v-if="info.original_name != info.name"
         >
-          Titolo originale : <br />{{ info.original_title }}
+          Titolo originale : <br />{{ info.original_name }}
         </div>
       </li>
       <li>
