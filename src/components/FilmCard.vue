@@ -4,6 +4,12 @@ export default {
   props: {
     info: Object,
   },
+  data() {
+    return {
+      stars: [],
+      emptyStars: [],
+    };
+  },
   methods: {
     getFlag() {
       if (this.info.original_language === "en") {
@@ -34,6 +40,18 @@ export default {
         return "https://upload.wikimedia.org/wikipedia/commons/f/f0/Flag_of_Slovenia.svg";
       }
     },
+    getVoteStars() {
+      for (let i = 0; i < Math.ceil(this.info.vote_average / 2); i++) {
+        this.stars.push(i);
+      }
+      for (let i = 0; i < 5 - Math.ceil(this.info.vote_average / 2); i++) {
+        this.emptyStars.push(i);
+        console.log(this.emptyStars);
+      }
+    },
+  },
+  created() {
+    this.getVoteStars();
   },
 };
 </script>
@@ -49,20 +67,20 @@ export default {
         />
       </li>
       <li>
-        <h5 class="list-group-item list-group-item-warning rounded-top mb-0">
+        <h5 class="list-group-item list-group-item-dark mb-0">
           {{ info.title }}
         </h5>
       </li>
       <li>
         <div
-          class="list-group-item list-group-item-warning"
+          class="list-group-item list-group-item-dark"
           v-if="info.original_title != info.title"
         >
           Titolo originale : <br />{{ info.original_title }}
         </div>
       </li>
       <li>
-        <div class="list-group-item list-group-item-warning">
+        <div class="list-group-item list-group-item-dark">
           Lingua originale : <br /><img
             :src="getFlag()"
             :alt="info.original_language"
@@ -72,11 +90,15 @@ export default {
       </li>
       <li>
         <div
-          class="list-group-item rounded-bottom list-group-item-warning"
+          class="list-group-item rounded-bottom list-group-item-dark"
           v-if="info.vote_count > 0"
         >
           Voto : <br />
-          {{ Math.ceil(info.vote_average / 2) }}
+          <i class="fa-solid fa-star gold-star" v-for="star in stars"></i>
+          <i
+            class="fa-regular fa-star gold-star"
+            v-for="star in emptyStars"
+          ></i>
         </div>
       </li>
     </ul>
@@ -88,6 +110,9 @@ ul {
   list-style: none;
   .languages {
     max-width: 3.125rem;
+  }
+  .gold-star {
+    color: yellow;
   }
 }
 </style>
