@@ -42,6 +42,13 @@ export default {
   <div class="p-3 m-2 text-center">
     <ul class="list-group">
       <li>
+        <img
+          :src="`https://image.tmdb.org/t/p/w342${info.poster_path}`"
+          alt="immagine film/serie"
+          class="img-fluid"
+        />
+      </li>
+      <li>
         <h5 class="list-group-item list-group-item-warning rounded-top mb-0">
           {{ info.name }}
         </h5>
@@ -59,7 +66,7 @@ export default {
           Lingua originale : <br /><img
             :src="getFlag()"
             :alt="info.original_language"
-            class="mt-1"
+            class="mt-1 languages"
           />
         </div>
       </li>
@@ -76,7 +83,7 @@ export default {
 <style lang="scss" scoped>
 ul {
   list-style: none;
-  img {
+  .languages {
     max-width: 3.125rem;
   }
 }
