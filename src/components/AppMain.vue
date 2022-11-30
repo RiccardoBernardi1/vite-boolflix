@@ -15,10 +15,8 @@ export default {
 </script>
 
 <template>
-  <main class="container">
-    <div class="app-cards row justify-content-around">
-      <AppCard :info="movie" v-for="movie in store.movies" class="app-card" />
-    </div>
+  <main class="row justify-content-around">
+    <AppCard :info="movie" v-for="movie in store.movies" class="app-card" />
   </main>
 </template>
 
