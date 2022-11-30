@@ -71,9 +71,12 @@ export default {
         </div>
       </li>
       <li>
-        <div class="list-group-item rounded-bottom list-group-item-warning">
+        <div
+          class="list-group-item rounded-bottom list-group-item-warning"
+          v-if="info.vote_count > 0"
+        >
           Voto : <br />
-          {{ info.vote_average }}
+          {{ Math.ceil(info.vote_average / 2) }}
         </div>
       </li>
     </ul>

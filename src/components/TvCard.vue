@@ -73,7 +73,7 @@ export default {
       <li>
         <div class="list-group-item rounded-bottom list-group-item-warning">
           Voto : <br />
-          {{ info.vote_average }}
+          {{ Math.ceil(info.vote_average / 2) }}
         </div>
       </li>
     </ul>
