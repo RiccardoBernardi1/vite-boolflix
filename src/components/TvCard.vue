@@ -4,6 +4,12 @@ export default {
   props: {
     info: Object,
   },
+  data() {
+    return {
+      stars: [],
+      emptyStars: [],
+    };
+  },
   methods: {
     getFlag() {
       if (this.info.original_language === "en") {
@@ -34,6 +40,17 @@ export default {
         return "https://upload.wikimedia.org/wikipedia/commons/f/f0/Flag_of_Slovenia.svg";
       }
     },
+    getVoteStars() {
+      for (let i = 0; i < Math.ceil(this.info.vote_average / 2); i++) {
+        this.stars.push(i);
+      }
+      for (let i = 0; i < 5 - Math.ceil(this.info.vote_average / 2); i++) {
+        this.emptyStars.push(i);
+      }
+    },
+  },
+  created() {
+    this.getVoteStars();
   },
 };
 </script>
@@ -73,7 +90,11 @@ export default {
       <li>
         <div class="list-group-item rounded-bottom list-group-item-warning">
           Voto : <br />
-          {{ Math.ceil(info.vote_average / 2) }}
+          <i class="fa-solid fa-star gold-star" v-for="star in stars"></i>
+          <i
+            class="fa-regular fa-star gold-star"
+            v-for="star in emptyStars"
+          ></i>
         </div>
       </li>
     </ul>
@@ -85,6 +106,9 @@ ul {
   list-style: none;
   .languages {
     max-width: 3.125rem;
+  }
+  .gold-star {
+    color: yellow;
   }
 }
 </style>

@@ -46,7 +46,6 @@ export default {
       }
       for (let i = 0; i < 5 - Math.ceil(this.info.vote_average / 2); i++) {
         this.emptyStars.push(i);
-        console.log(this.emptyStars);
       }
     },
   },
