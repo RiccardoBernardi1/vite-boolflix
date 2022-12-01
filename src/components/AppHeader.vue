@@ -22,6 +22,8 @@ export default {
         type="text"
         class="me-3 rounded-pill px-2"
         v-model="store.textInput"
+        required
+        placeholder="Cerca serie o film"
       />
       <button class="rounded-pill px-2">Cerca</button>
     </form>

@@ -24,7 +24,9 @@ export default {
           },
         })
         .then((resp) => {
-          this.store.movies = resp.data.results;
+          this.store.movies = resp.data.results.filter(
+            (movie) => movie.adult === false
+          );
           console.log(resp.data);
           console.log(this.store.movies);
         })
@@ -41,7 +43,7 @@ export default {
         })
         .then((resp) => {
           this.store.series = resp.data.results;
-          console.log(resp.data.results, "aa");
+          console.log(this.store.series, "aa");
         })
         .catch((err) => {
           this.store.movies = [];

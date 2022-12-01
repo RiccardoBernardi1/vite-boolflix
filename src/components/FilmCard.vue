@@ -56,62 +56,138 @@ export default {
 </script>
 
 <template>
-  <div class="p-3 m-2 text-center">
-    <ul class="list-group">
-      <li>
+  <div class="m-2 app-card">
+    <div class="app-card-inner">
+      <div class="app-card-front">
         <img
           :src="`https://image.tmdb.org/t/p/w342${info.poster_path}`"
           alt="immagine film/serie"
-          class="img-fluid"
+          class="poster-img"
         />
-      </li>
-      <li>
-        <h5 class="list-group-item list-group-item-dark mb-0">
-          {{ info.title }}
-        </h5>
-      </li>
-      <li>
-        <div
-          class="list-group-item list-group-item-dark"
-          v-if="info.original_title != info.title"
-        >
-          Titolo originale : <br />{{ info.original_title }}
-        </div>
-      </li>
-      <li>
-        <div class="list-group-item list-group-item-dark">
-          Lingua originale : <br /><img
-            :src="getFlag()"
-            :alt="info.original_language"
-            class="mt-1 languages"
-          />
-        </div>
-      </li>
-      <li>
-        <div
-          class="list-group-item rounded-bottom list-group-item-dark"
-          v-if="info.vote_count > 0"
-        >
-          Voto : <br />
-          <i class="fa-solid fa-star gold-star" v-for="star in stars"></i>
-          <i
-            class="fa-regular fa-star gold-star"
-            v-for="star in emptyStars"
-          ></i>
-        </div>
-      </li>
-    </ul>
+      </div>
+      <div class="app-card-back">
+        <ul class="list-group">
+          <li>
+            <h5 class="list-group-item mb-0">
+              {{ info.title }}{{ info.name }}
+            </h5>
+          </li>
+          <li
+            class="list-group-item"
+            v-if="
+              info.original_name != info.name ||
+              info.original_title != info.title
+            "
+          >
+            Titolo originale : {{ info.original_title }}{{ info.original_name }}
+          </li>
+          <li class="list-group-item">
+            Lingua originale :
+            <img
+              :src="getFlag()"
+              :alt="info.original_language"
+              class="mt-1 languages"
+            />
+          </li>
+          <li class="list-group-item" v-if="info.vote_count > 0">
+            Voto :
+            <i class="fa-solid fa-star gold-star" v-for="star in stars"></i>
+            <i
+              class="fa-regular fa-star gold-star"
+              v-for="star in emptyStars"
+            ></i>
+          </li>
+          <li class="list-group-item" v-if="info.overview.length > 0">
+            Anteprima: {{ info.overview }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-ul {
-  list-style: none;
-  .languages {
-    max-width: 3.125rem;
+.app-card {
+  background-color: transparent;
+  perspective: 1000px;
+  width: 18.75rem;
+  height: 25.625rem;
+  &:hover .app-card-inner {
+    transform: rotateY(180deg);
   }
-  .gold-star {
-    color: yellow;
+  .app-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  .app-card-front,
+  .app-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow-y: hidden;
+
+    li {
+      max-height: 11.5625rem;
+      overflow-y: auto;
+      width: 100%;
+      &::-webkit-scrollbar,
+      .messages::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b30000;
+      }
+      /* impostazioni scrollbar firefox */
+      & {
+        scrollbar-width: none;
+      }
+    }
+  }
+  .app-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+  .app-card-back {
+    background-color: rgba($color: #000000, $alpha: 0.8);
+    color: white;
+    transform: rotateY(180deg);
+  }
+  .app-card-front .poster-img {
+    width: 100%;
+    min-height: 25.875rem;
+  }
+  ul {
+    list-style: none;
+    .languages {
+      max-width: 3.125rem;
+    }
+    li,
+    h5 {
+      background-color: transparent;
+      border: none;
+      color: white;
+      max-width: 100%;
+    }
+    li:not(:last-child) {
+      border-bottom: 0.125rem solid rgba($color: #000000, $alpha: 0.8);
+    }
+    .gold-star {
+      color: yellow;
+    }
   }
 }
 </style>
