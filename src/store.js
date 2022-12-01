@@ -4,4 +4,6 @@ export const store = reactive({
   textInput: "",
   movies: [],
   series: [],
+  moviesAndSeries: [],
+  standardCall: true,
 });
