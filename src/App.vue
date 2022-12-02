@@ -60,7 +60,6 @@ export default {
           this.store.movies = resp.data.results.filter(
             (movie) => movie.adult === false
           );
-          console.log(this.store.movies, "popufilm");
           axios
             .get("https://api.themoviedb.org/3/tv/popular", {
               params: {
@@ -70,7 +69,6 @@ export default {
             })
             .then((resp) => {
               this.store.series = resp.data.results;
-              console.log(this.store.series, "popuserie");
               let longerList = [];
               let shorterList = [];
               if (this.store.movies.length >= this.store.series.length) {
@@ -85,8 +83,6 @@ export default {
                 if (index < shorterList.length) {
                   this.store.popularMoviesAndSeries.push(shorterList[index]);
                 }
-                console.log(this.store.popularMoviesAndSeries, "populist");
-                console.log(this.store.popularMoviesAndSeries[0], "populist");
               });
             })
             .catch((err) => {
@@ -109,7 +105,6 @@ export default {
           this.store.movies = resp.data.results.filter(
             (movie) => movie.adult === false
           );
-          console.log(this.store.movies);
           axios
             .get("https://api.themoviedb.org/3/tv/top_rated", {
               params: {
@@ -143,52 +138,6 @@ export default {
           this.store.movies = [];
         });
     },
-    getLatest() {
-      axios
-        .get("https://api.themoviedb.org/3/movie/latest", {
-          params: {
-            api_key: "51b431a1c8f87df48585c99376339b80",
-            language: "it-IT",
-          },
-        })
-        .then((resp) => {
-          this.store.movies = resp.data.results.filter(
-            (movie) => movie.adult === false
-          );
-          console.log(this.store.movies);
-          axios
-            .get("https://api.themoviedb.org/3/tv/latest", {
-              params: {
-                api_key: "51b431a1c8f87df48585c99376339b80",
-                language: "it-IT",
-              },
-            })
-            .then((resp) => {
-              this.store.series = resp.data.results;
-              let longerList = [];
-              let shorterList = [];
-              if (this.store.movies.length >= this.store.series.length) {
-                longerList = this.store.movies;
-                shorterList = this.store.series;
-              } else {
-                longerList = this.store.series;
-                shorterList = this.store.movies;
-              }
-              longerList.forEach((elm, index) => {
-                this.store.latest.push(elm);
-                if (index < shorterList.length) {
-                  this.latest.topRated.push(shorterList[index]);
-                }
-              });
-            })
-            .catch((err) => {
-              this.store.series = [];
-            });
-        })
-        .catch((err) => {
-          this.store.movies = [];
-        });
-    },
     getgenres() {
       axios
         .get("https://api.themoviedb.org/3/genre/movie/list", {
@@ -205,6 +154,7 @@ export default {
   created() {
     this.store.standardCall = true;
     this.getPopularMoviesAndSeries();
+    this.getTopRated();
     this.getgenres();
   },
 };
@@ -218,6 +168,6 @@ export default {
 <style lang="scss">
 @import "./style/global.scss";
 body {
-  background-color: darkgray;
+  background-color: black;
 }
 </style>

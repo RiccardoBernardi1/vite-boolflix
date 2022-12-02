@@ -1,51 +1,44 @@
 <template>
-  <h2 class="fw-bold pt-3 ms-4">I più popolari su Boolflix</h2>
   <div class="wrapper">
-    <section id="section1">
-      <a href="#section3" class="arrow__btn">‹</a>
+    <section :id="`section${num}`">
+      <a :href="`#section${num + 3}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
         <img
-          :src="`https://image.tmdb.org/t/p/w342${store.popularMoviesAndSeries[n]?.poster_path}`"
-          :alt="store.popularMoviesAndSeries[n]?.title"
+          :src="`https://image.tmdb.org/t/p/w342${info[n]?.poster_path}`"
+          :alt="info[n]?.title"
         />
       </div>
-      <a href="#section2" class="arrow__btn">›</a>
+      <a :href="`#section${num + 1}`" class="arrow__btn">›</a>
     </section>
-    <section id="section2">
-      <a href="#section1" class="arrow__btn">‹</a>
+    <section :id="`section${num + 1}`">
+      <a :href="`#section${num}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
         <img
-          :src="`https://image.tmdb.org/t/p/w342${
-            store.popularMoviesAndSeries[n + 4]?.poster_path
-          }`"
-          :alt="store.popularMoviesAndSeries[n + 4]?.title"
+          :src="`https://image.tmdb.org/t/p/w342${info[n + 4]?.poster_path}`"
+          :alt="info[n + 4]?.title"
         />
       </div>
-      <a href="#section3" class="arrow__btn">›</a>
+      <a :href="`#section${num + 2}`" class="arrow__btn">›</a>
     </section>
-    <section id="section3">
-      <a href="#section2" class="arrow__btn">‹</a>
+    <section :id="`section${num + 2}`">
+      <a :href="`#section${num + 1}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
         <img
-          :src="`https://image.tmdb.org/t/p/w342${
-            store.popularMoviesAndSeries[n + 8]?.poster_path
-          }`"
-          :alt="store.popularMoviesAndSeries[n + 8]?.title"
+          :src="`https://image.tmdb.org/t/p/w342${info[n + 8]?.poster_path}`"
+          :alt="info[n + 8]?.title"
         />
       </div>
-      <a href="#section4" class="arrow__btn">›</a>
+      <a :href="`#section${num + 3}`" class="arrow__btn">›</a>
     </section>
-    <section id="section4">
-      <a href="#section3" class="arrow__btn">‹</a>
+    <section :id="`section${num + 3}`">
+      <a :href="`#section${num + 2}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
         <img
-          :src="`https://image.tmdb.org/t/p/w342${
-            store.popularMoviesAndSeries[n + 12]?.poster_path
-          }`"
-          :alt="store.popularMoviesAndSeries[n + 12]?.title"
+          :src="`https://image.tmdb.org/t/p/w342${info[n + 12]?.poster_path}`"
+          :alt="info[n + 12]?.title"
         />
       </div>
-      <a href="#section1" class="arrow__btn">›</a>
+      <a :href="`#section${num}`" class="arrow__btn">›</a>
     </section>
   </div>
 </template>
@@ -54,6 +47,10 @@
 import { store } from "../store";
 export default {
   name: "AppCarousel",
+  props: {
+    info: Object,
+    num: Number,
+  },
   data() {
     return {
       store,
@@ -99,6 +96,10 @@ h2 {
       &:hover {
         margin: 0 40px;
         transform: scale(1.2);
+      }
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
 
