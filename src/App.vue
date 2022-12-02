@@ -138,6 +138,24 @@ export default {
           this.store.movies = [];
         });
     },
+    getTrend() {
+      axios
+        .get("https://api.themoviedb.org/3/trending/all/day", {
+          params: {
+            api_key: "51b431a1c8f87df48585c99376339b80",
+            language: "it-IT",
+          },
+        })
+        .then((resp) => {
+          console.log(resp.data);
+          this.store.trend = resp.data.results.filter(
+            (movie) => movie.adult === false
+          );
+        })
+        .catch((err) => {
+          this.store.trend = [];
+        });
+    },
     getgenres() {
       axios
         .get("https://api.themoviedb.org/3/genre/movie/list", {
@@ -147,7 +165,7 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp.data);
+          console.log(resp.data.genres);
         });
     },
   },
@@ -155,6 +173,7 @@ export default {
     this.store.standardCall = true;
     this.getPopularMoviesAndSeries();
     this.getTopRated();
+    this.getTrend();
     this.getgenres();
   },
 };
