@@ -9,5 +9,7 @@ export const store = reactive({
   topRated: [],
   genres: [],
   trend: [],
+  animation: [],
+  comedy: [],
   standardCall: true,
 });

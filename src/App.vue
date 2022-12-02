@@ -166,6 +166,19 @@ export default {
         })
         .then((resp) => {
           console.log(resp.data.genres);
+          const allFilms = this.store.trend.concat(
+            this.store.topRated,
+            this.store.popularMoviesAndSeries
+          );
+          console.log(allFilms, "all");
+          this.store.animation = allFilms.filter((elm) =>
+            elm.genre_ids.includes(resp.data.genres[2].id)
+          );
+          console.log(this.store.animation, "anima");
+          this.store.comedy = allFilms.filter((elm) =>
+            elm.genre_ids.includes(resp.data.genres[3].id)
+          );
+          console.log(this.store.comedy, "come");
         });
     },
   },

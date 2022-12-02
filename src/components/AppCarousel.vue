@@ -81,7 +81,7 @@ h2 {
   grid-template-columns: repeat(4, 100%);
   overflow: hidden;
   scroll-behavior: smooth;
-
+  height: 37.5rem;
   section {
     width: 100%;
     position: relative;
