@@ -68,9 +68,9 @@ export default {
       <div class="app-card-back">
         <ul class="list-group">
           <li>
-            <h5 class="list-group-item mb-0">
+            <h4 class="list-group-item mb-0 fw-bold">
               {{ info.title }}{{ info.name }}
-            </h5>
+            </h4>
           </li>
           <li
             class="list-group-item"
@@ -79,10 +79,11 @@ export default {
               info.original_title != info.title
             "
           >
-            Titolo originale : {{ info.original_title }}{{ info.original_name }}
+            <span class="fw-bold">Titolo originale : </span>
+            {{ info.original_title }}{{ info.original_name }}
           </li>
           <li class="list-group-item">
-            Lingua originale :
+            <span class="fw-bold">Lingua originale : </span>
             <img
               :src="getFlag()"
               :alt="info.original_language"
@@ -90,7 +91,7 @@ export default {
             />
           </li>
           <li class="list-group-item" v-if="info.vote_count > 0">
-            Voto :
+            <span class="fw-bold">Voto : </span>
             <i class="fa-solid fa-star gold-star" v-for="star in stars"></i>
             <i
               class="fa-regular fa-star gold-star"
@@ -98,7 +99,7 @@ export default {
             ></i>
           </li>
           <li class="list-group-item" v-if="info.overview.length > 0">
-            Anteprima: {{ info.overview }}
+            <span class="fw-bold">Anteprima : </span>{{ info.overview }}
           </li>
         </ul>
       </div>
@@ -130,11 +131,11 @@ export default {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    overflow-y: hidden;
 
     li {
-      max-height: 11.5625rem;
-      overflow-y: auto;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+      max-height: 6.5625rem;
       width: 100%;
       &::-webkit-scrollbar,
       .messages::-webkit-scrollbar {
@@ -168,7 +169,7 @@ export default {
   }
   .app-card-front .poster-img {
     width: 100%;
-    min-height: 25.875rem;
+    height: 100%;
   }
   ul {
     list-style: none;
@@ -176,7 +177,7 @@ export default {
       max-width: 3.125rem;
     }
     li,
-    h5 {
+    h4 {
       background-color: transparent;
       border: none;
       color: white;
