@@ -23,11 +23,11 @@ export default {
 <template>
   <main class="container-fluid">
     <div id="home" v-show="store.standardCall">
-      <h2 class="fw-bold py-3 ms-2">I più popolari su Boolflix</h2>
+      <h2 class="fw-bold py-4 ms-2">I più popolari su Boolflix</h2>
       <AppCarousel :info="store.popularMoviesAndSeries" num="1" />
-      <h2 class="fw-bold py-3 ms-2">I più votati su Boolflix</h2>
+      <h2 class="fw-bold py-4 ms-2">I più votati su Boolflix</h2>
       <AppCarousel :info="store.topRated" num="5" />
-      <h2 class="fw-bold py-3 ms-2">Tendenze</h2>
+      <h2 class="fw-bold py-4 ms-2">Tendenze</h2>
       <AppCarousel :info="store.trend" num="9" />
     </div>
     <div class="row justify-content-around" v-show="store.search">

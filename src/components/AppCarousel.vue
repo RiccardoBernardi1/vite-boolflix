@@ -116,19 +116,18 @@ h2 {
   grid-template-columns: repeat(4, 100%);
   overflow: hidden;
   scroll-behavior: smooth;
-  height: 37.5rem;
+  min-height: 12.5rem;
   section {
     width: 100%;
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, auto);
     margin: 20px 0;
-
     .item {
       position: relative;
       padding: 0 2px;
       transition: $duration all;
-
+      height: 100%;
       &:hover {
         margin: 0 40px;
         transform: scale(1.2);
@@ -136,15 +135,6 @@ h2 {
       img {
         width: 100%;
         height: 100%;
-        object-fit: fill;
-      }
-      .card-back {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba($color: #000000, $alpha: 0.8);
       }
     }
 
@@ -158,7 +148,8 @@ h2 {
       padding: 20px;
       text-align: center;
       z-index: 1;
-      line-height: 473px;
+      display: flex;
+      align-items: center;
 
       &:nth-of-type(1) {
         top: 0;
@@ -181,13 +172,6 @@ h2 {
         );
       }
     }
-  }
-}
-
-// Remove the arrow for Mobile
-@media only screen and (max-width: 600px) {
-  a.arrow__btn {
-    display: none;
   }
 }
 </style>

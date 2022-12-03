@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <header class="px-2 py-3">
+  <header class="px-2 py-3" v-if="store.popularMoviesAndSeries.length > 0">
     <div
       class="container-fluid d-flex justify-content-between align-items-center"
     >
@@ -63,7 +63,11 @@ export default {
           required
           placeholder="Cerca serie o film"
         />
-        <button class="rounded-pill px-3 py-1 fw-bold">Cerca</button>
+        <button
+          class="rounded-pill px-3 py-1 fw-bold d-flex align-items-center"
+        >
+          Cerca
+        </button>
       </form>
     </div>
   </header>
