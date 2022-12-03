@@ -17,16 +17,37 @@ export default {
     >
       <h1>BOOLFLIX</h1>
       <nav>
-        <a href="#home" @click="store.standardCall = true" class="px-4 fw-bold"
+        <a
+          href="#home"
+          @click="
+            (store.standardCall = true),
+              (store.seriesPage = false),
+              (this.store.search = false),
+              (this.store.moviesPage = false)
+          "
+          class="px-4 fw-bold"
           >HOME</a
         >
         <a
           href="#series"
-          @click="store.standardCall = false"
+          @click="
+            (store.standardCall = false),
+              (store.seriesPage = true),
+              (this.store.search = false),
+              (this.store.moviesPage = false)
+          "
           class="px-4 fw-bold"
           >SERIE</a
         >
-        <a href="#home" @click="store.standardCall = false" class="px-4 fw-bold"
+        <a
+          href="#films"
+          @click="
+            (store.standardCall = false),
+              (store.seriesPage = false),
+              (this.store.search = false),
+              (this.store.moviesPage = true)
+          "
+          class="px-4 fw-bold"
           >FILM</a
         >
       </nav>

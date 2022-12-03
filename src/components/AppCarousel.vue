@@ -6,6 +6,12 @@
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n]?.poster_path}`"
           :alt="info[n]?.title"
+          v-if="info[n]?.poster_path != null"
+        />
+        <img
+          :src="`https://via.placeholder.com/342x485/000?text=${info[n].title}`"
+          :alt="info[n]?.title"
+          v-else
         />
       </div>
       <a :href="`#section${num + 1}`" class="arrow__btn">›</a>
@@ -16,6 +22,14 @@
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n + 4]?.poster_path}`"
           :alt="info[n + 4]?.title"
+          v-if="info[n + 4]?.poster_path != null"
+        />
+        <img
+          :src="`https://via.placeholder.com/342x485/000?text=${
+            info[n + 4].title
+          }`"
+          :alt="info[n + 4]?.title"
+          v-else
         />
       </div>
       <a :href="`#section${num + 2}`" class="arrow__btn">›</a>
@@ -26,6 +40,14 @@
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n + 8]?.poster_path}`"
           :alt="info[n + 8]?.title"
+          v-if="info[n + 8]?.poster_path != null"
+        />
+        <img
+          :src="`https://via.placeholder.com/342x485/000?text=${
+            info[n + 8].title
+          }`"
+          :alt="info[n + 8]?.title"
+          v-else
         />
       </div>
       <a :href="`#section${num + 3}`" class="arrow__btn">›</a>
@@ -36,6 +58,14 @@
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n + 12]?.poster_path}`"
           :alt="info[n + 12]?.title"
+          v-if="info[n + 12]?.poster_path != null"
+        />
+        <img
+          :src="`https://via.placeholder.com/342x485/000?text=${
+            info[n + 12].name
+          }`"
+          :alt="info[n + 12]?.name"
+          v-else
         />
       </div>
       <a :href="`#section${num}`" class="arrow__btn">›</a>
@@ -55,6 +85,11 @@ export default {
     return {
       store,
     };
+  },
+  computed: {
+    vote() {
+      return Math.ceil(this.info.vote_average / 2);
+    },
   },
 };
 </script>
@@ -90,6 +125,7 @@ h2 {
     margin: 20px 0;
 
     .item {
+      position: relative;
       padding: 0 2px;
       transition: $duration all;
 
@@ -100,6 +136,15 @@ h2 {
       img {
         width: 100%;
         height: 100%;
+        object-fit: fill;
+      }
+      .card-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.8);
       }
     }
 

@@ -43,6 +43,8 @@ export default {
         .then((resp) => {
           this.store.series = resp.data.results;
           this.store.standardCall = false;
+          this.store.search = true;
+          this.store.seriesPage = false;
         })
         .catch((err) => {
           this.store.movies = [];
@@ -60,6 +62,7 @@ export default {
           this.store.movies = resp.data.results.filter(
             (movie) => movie.adult === false
           );
+          this.store.popularMovies = this.store.movies;
           axios
             .get("https://api.themoviedb.org/3/tv/popular", {
               params: {
@@ -69,6 +72,7 @@ export default {
             })
             .then((resp) => {
               this.store.series = resp.data.results;
+              this.store.popularSeries = resp.data.results;
               let longerList = [];
               let shorterList = [];
               if (this.store.movies.length >= this.store.series.length) {
@@ -105,6 +109,7 @@ export default {
           this.store.movies = resp.data.results.filter(
             (movie) => movie.adult === false
           );
+          this.store.topRatedMovies = this.store.movies;
           axios
             .get("https://api.themoviedb.org/3/tv/top_rated", {
               params: {
@@ -114,6 +119,7 @@ export default {
             })
             .then((resp) => {
               this.store.series = resp.data.results;
+              this.store.topRatedSeries = resp.data.results;
               let longerList = [];
               let shorterList = [];
               if (this.store.movies.length >= this.store.series.length) {
@@ -151,6 +157,23 @@ export default {
           this.store.trend = resp.data.results.filter(
             (movie) => movie.adult === false
           );
+          this.store.trendMovies = this.store.trend;
+          axios
+            .get("https://api.themoviedb.org/3/trending/tv/day", {
+              params: {
+                api_key: "51b431a1c8f87df48585c99376339b80",
+                language: "it-IT",
+              },
+            })
+            .then((resp) => {
+              console.log(resp.data);
+              this.store.trendSeries = resp.data.results.filter(
+                (movie) => movie.adult === false
+              );
+            })
+            .catch((err) => {
+              this.store.trendSeries = [];
+            });
         })
         .catch((err) => {
           this.store.trend = [];
