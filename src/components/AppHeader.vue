@@ -11,12 +11,12 @@ export default {
 </script>
 
 <template>
-  <header class="px-2 py-3" v-if="store.popularMoviesAndSeries.length > 0">
+  <header class="px-1 py-3" v-if="store.popularMoviesAndSeries.length > 0">
     <div
-      class="container-fluid d-flex justify-content-between align-items-center"
+      class="container-fluid d-flex justify-content-between align-items-center flex-wrap"
     >
       <h1>BOOLFLIX</h1>
-      <nav>
+      <nav class="my-3">
         <a
           href="#home"
           @click="
@@ -53,12 +53,12 @@ export default {
       </nav>
       <form
         action=""
-        class="d-flex align-items-center p-2"
+        class="d-flex align-items-center justify-content-end p-2"
         @submit.prevent="$emit('searchMovies')"
       >
         <input
           type="text"
-          class="me-3 rounded-pill px-2"
+          class="me-2 rounded-pill px-2"
           v-model="store.textInput"
           required
           placeholder="Cerca serie o film"
@@ -76,33 +76,49 @@ export default {
 <style lang="scss" scoped>
 header {
   background-color: black;
+
   h1 {
     color: darkred;
-  }
-  a {
-    text-decoration: none;
-    color: white;
-    transition: all 0.5s;
-    &:hover {
-      scale: 1.1;
-      margin: 0 1.25rem;
-      font-size: 1.5rem;
+    @include media-breakpoint-down(md) {
+      width: 50%;
     }
   }
-  input {
-    outline: none;
+  nav {
+    margin-left: auto;
+    margin-right: auto;
+    a {
+      text-decoration: none;
+      color: white;
+      transition: all 0.5s;
+      &:hover {
+        scale: 1.1;
+        margin: 0 1.25rem;
+        font-size: 1.5rem;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      order: 2;
+    }
   }
-  button {
-    background-color: darkred;
-    color: white;
-    border: none;
 
-    transition: scale 0.5s;
-    &:hover {
-      scale: 1.1;
+  form {
+    @include media-breakpoint-down(md) {
+      width: 50%;
     }
-    &:active {
-      scale: 0.9;
+    input {
+      outline: none;
+    }
+    button {
+      background-color: darkred;
+      color: white;
+      border: none;
+      transition: scale 0.5s;
+      &:hover {
+        scale: 1.1;
+      }
+      &:active {
+        scale: 0.9;
+      }
     }
   }
 }
