@@ -3,6 +3,14 @@
     <section :id="`section${num}`">
       <a :href="`#section${num + 3}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+          @click="store.clickedCard = info[n]"
+        >
+        </a>
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n]?.poster_path}`"
           :alt="info[n]?.title"
@@ -19,6 +27,14 @@
     <section :id="`section${num + 1}`">
       <a :href="`#section${num}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+          @click="store.clickedCard = info[n + 4]"
+        >
+        </a>
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n + 4]?.poster_path}`"
           :alt="info[n + 4]?.title"
@@ -37,6 +53,14 @@
     <section :id="`section${num + 2}`">
       <a :href="`#section${num + 1}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+          @click="store.clickedCard = info[n + 8]"
+        >
+        </a>
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n + 8]?.poster_path}`"
           :alt="info[n + 8]?.title"
@@ -55,6 +79,14 @@
     <section :id="`section${num + 3}`">
       <a :href="`#section${num + 2}`" class="arrow__btn">‹</a>
       <div class="item" v-for="n in 4">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+          @click="store.clickedCard = info[n + 12]"
+        >
+        </a>
         <img
           :src="`https://image.tmdb.org/t/p/w342${info[n + 12]?.poster_path}`"
           :alt="info[n + 12]?.title"
@@ -117,6 +149,7 @@ h2 {
   overflow: hidden;
   scroll-behavior: smooth;
   min-height: 12.5rem;
+
   section {
     width: 100%;
     position: relative;
@@ -132,6 +165,15 @@ h2 {
         margin: 0 40px;
         transform: scale(1.2);
       }
+      a:not(.arrow__btn) {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
       img {
         width: 100%;
         height: 100%;
@@ -146,7 +188,7 @@ h2 {
       }
     }
 
-    a {
+    .arrow__btn {
       position: absolute;
       color: #fff;
       text-decoration: none;

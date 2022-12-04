@@ -1,5 +1,6 @@
 <script>
 import { store } from "../store";
+import { Offcanvas } from "bootstrap";
 import FilmCard from "./FilmCard.vue";
 import AppCarousel from "./AppCarousel.vue";
 import AppSeries from "./AppSeries.vue";
@@ -32,19 +33,53 @@ export default {
     </div>
     <div class="row justify-content-around" v-show="store.search">
       <div class="row justify-content-around">
-        <h2 v-if="store.movies.length > 0" class="text-center">Film</h2>
         <FilmCard :info="movie" v-for="movie in store.movies" />
-        <h2 v-if="store.series.length > 0" class="text-center">Serie</h2>
         <FilmCard :info="series" v-for="series in store.series" />
       </div>
     </div>
     <AppSeries v-if="store.seriesPage && store.popularSeries.length > 0" />
     <AppFilms v-if="store.moviesPage && store.popularMovies.length > 0" />
   </main>
+  <div
+    class="offcanvas offcanvas-start text-bg-dark"
+    tabindex="-1"
+    id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel"
+  >
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title fw-bold" id="offcanvasExampleLabel">
+        {{ store.clickedCard.title || store.clickedCard.name }}
+      </h2>
+      <button
+        type="button"
+        class="btn-close btn-close-white"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <img
+        :src="`https://image.tmdb.org/t/p/w500${store.clickedCard.poster_path}`"
+        :alt="store.clickedCard.title || store.clickedCard.name"
+      />
+      <div class="mt-3" v-if="store.clickedCard.overview.length > 0">
+        <h6 class="fw-bold">Anteprima</h6>
+        {{ store.clickedCard.overview }}
+      </div>
+      <div class="mt-3" v-if="store.clickedCard.overview.length > 0">
+        <h6 class="fw-bold">Voto</h6>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 main {
   color: white;
+}
+.offcanvas-body {
+  img {
+    max-width: 100%;
+  }
 }
 </style>

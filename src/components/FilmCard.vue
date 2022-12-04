@@ -56,13 +56,13 @@ export default {
 </script>
 
 <template>
-  <div class="m-2 app-card">
+  <div class="m-4 app-card">
     <div class="app-card-inner">
       <div class="app-card-front">
         <img
           :src="`https://image.tmdb.org/t/p/w342${info.poster_path}`"
           alt="immagine film/serie"
-          class="poster-img"
+          class="poster-img rounded-4"
         />
       </div>
       <div class="app-card-back">
@@ -110,27 +110,28 @@ export default {
 <style lang="scss" scoped>
 .app-card {
   background-color: transparent;
-  perspective: 1000px;
   width: 18.75rem;
   height: 25.625rem;
-  &:hover .app-card-inner {
-    transform: rotateY(180deg);
+  transition: scale 0.4s;
+  &:hover {
+    scale: 1.2;
+  }
+  &:hover .app-card-back {
+    display: block;
   }
   .app-card-inner {
     position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
   }
   .app-card-front,
   .app-card-back {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 
     li {
       overflow-y: hidden;
@@ -159,13 +160,13 @@ export default {
     }
   }
   .app-card-front {
-    background-color: #bbb;
+    background-color: transparent;
     color: black;
   }
   .app-card-back {
     background-color: rgba($color: #000000, $alpha: 0.8);
     color: white;
-    transform: rotateY(180deg);
+    display: none;
   }
   .app-card-front .poster-img {
     width: 100%;
@@ -184,7 +185,7 @@ export default {
       max-width: 100%;
     }
     li:not(:last-child) {
-      border-bottom: 0.125rem solid rgba($color: #000000, $alpha: 0.8);
+      border-bottom: 0.125rem solid white;
     }
     .gold-star {
       color: yellow;

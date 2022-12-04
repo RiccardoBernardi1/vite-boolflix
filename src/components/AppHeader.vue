@@ -13,12 +13,12 @@ export default {
 <template>
   <header class="px-1 py-3" v-if="store.popularMoviesAndSeries.length > 0">
     <div
-      class="container-fluid d-flex justify-content-between align-items-center flex-wrap"
+      class="container-fluid d-flex justify-content-between align-items-center"
     >
       <h1>BOOLFLIX</h1>
       <nav class="my-3">
         <a
-          href="#home"
+          href="#"
           @click="
             (store.standardCall = true),
               (store.seriesPage = false),
@@ -29,7 +29,7 @@ export default {
           >HOME</a
         >
         <a
-          href="#series"
+          href="#"
           @click="
             (store.standardCall = false),
               (store.seriesPage = true),
@@ -40,7 +40,7 @@ export default {
           >SERIE</a
         >
         <a
-          href="#films"
+          href="#"
           @click="
             (store.standardCall = false),
               (store.seriesPage = false),
@@ -76,7 +76,11 @@ export default {
 <style lang="scss" scoped>
 header {
   background-color: black;
-
+  .container-fluid {
+    @include media-breakpoint-down(md) {
+      flex-wrap: wrap;
+    }
+  }
   h1 {
     color: darkred;
     @include media-breakpoint-down(md) {

@@ -20,4 +20,5 @@ export const store = reactive({
   moviesPage: false,
   standardCall: true,
   search: false,
+  clickedCard: "",
 });
