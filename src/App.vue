@@ -110,6 +110,19 @@ export default {
             (movie) => movie.adult === false
           );
           this.store.topRatedMovies = this.store.movies;
+          this.store.topRatedMovies.forEach((elm) => {
+            axios
+              .get(`https://api.themoviedb.org/3/movie/${elm.id}/videos`, {
+                params: {
+                  api_key: "51b431a1c8f87df48585c99376339b80",
+                  language: "it-IT",
+                },
+              })
+              .then((resp) => {
+                console.log(resp.data, "video");
+                this.store.videos.push(resp.data.results);
+              });
+          });
           axios
             .get("https://api.themoviedb.org/3/tv/top_rated", {
               params: {
@@ -224,5 +237,23 @@ export default {
 @import "./style/global.scss";
 body {
   background-color: black;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
+  /* impostazioni scrollbar firefox */
+  & {
+    scrollbar-width: none;
+  }
 }
 </style>

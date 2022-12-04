@@ -18,6 +18,15 @@ export default {
       store,
     };
   },
+  methods: {
+    vote() {
+      console.log(
+        Math.ceil(this.store.clickedCard.vote_average / 2),
+        "aaaaaaaa"
+      );
+      return Math.ceil(this.store.clickedCard.vote_average / 2);
+    },
+  },
 };
 </script>
 
@@ -62,12 +71,12 @@ export default {
         :src="`https://image.tmdb.org/t/p/w500${store.clickedCard.poster_path}`"
         :alt="store.clickedCard.title || store.clickedCard.name"
       />
-      <div class="mt-3" v-if="store.clickedCard.overview.length > 0">
+      <div
+        class="mt-3"
+        v-if="store.clickedCard != '' && store.clickedCard.overview.length > 0"
+      >
         <h6 class="fw-bold">Anteprima</h6>
         {{ store.clickedCard.overview }}
-      </div>
-      <div class="mt-3" v-if="store.clickedCard.overview.length > 0">
-        <h6 class="fw-bold">Voto</h6>
       </div>
     </div>
   </div>
@@ -78,6 +87,24 @@ main {
   color: white;
 }
 .offcanvas-body {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
+  /* impostazioni scrollbar firefox */
+  & {
+    scrollbar-width: none;
+  }
   img {
     max-width: 100%;
   }
