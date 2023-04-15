@@ -21,4 +21,6 @@ export const store = reactive({
   standardCall: true,
   search: false,
   clickedCard: "",
+  videos: [],
+  trailer: "",
 });

@@ -106,7 +106,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { store } from "../store";
 export default {
   name: "AppCarousel",
@@ -122,6 +121,21 @@ export default {
   computed: {
     vote() {
       return Math.ceil(this.info.vote_average / 2);
+    },
+  },
+  methods: {
+    getTrailer() {
+      this.store.videos.forEach((elm) => {
+        if (elm.id === this.store.clickedCard) {
+          if (elm.results.length >= 1) {
+            this.store.trailer = elm.results[0].key;
+            console.log(this.store.trailer, "trailer");
+          }
+        }
+      });
+    },
+    updated() {
+      this.getTrailer();
     },
   },
 };
