@@ -71,7 +71,7 @@ export default {
         :src="`https://image.tmdb.org/t/p/w500${store.clickedCard.poster_path}`"
         :alt="store.clickedCard.title || store.clickedCard.name"
       />
-      <video :src="`https://www.youtube.com/watch?v=${store.trailer}`"></video>
+
       <div
         class="mt-3"
         v-if="store.clickedCard != '' && store.clickedCard.overview.length > 0"
